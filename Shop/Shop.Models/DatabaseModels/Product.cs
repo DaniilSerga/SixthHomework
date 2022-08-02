@@ -13,7 +13,6 @@ namespace Shop.Models.DatabaseModels
 
         public decimal Price { get; set; }
 
-        public List<User> Users { get; set; } = new();
         public List<Sale> Sells { get; set; } = new();
     }
 }

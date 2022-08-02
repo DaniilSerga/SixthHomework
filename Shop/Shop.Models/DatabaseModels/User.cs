@@ -17,7 +17,6 @@ namespace Shop.Models.DatabaseModels
 
         public string PasswordSalt { get; set; }
 
-        public List<Product> Products { get; set; } = new();
         public List<Sale> Sells { get; set; } = new();
     }
 }
