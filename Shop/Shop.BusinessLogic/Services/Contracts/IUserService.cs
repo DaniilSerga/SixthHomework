@@ -1,13 +1,13 @@
-﻿using Shop.Models.DatabaseModels;
+﻿using Shop.Common.Models;
 
 namespace Shop.BusinessLogic.Services.Contracts
 {
     public interface IUserService
     {
-        List<User> GetAllUsers();
-        User GetUser(int id);
-        void Create(User user);
+        List<UserModel> GetAllUsers();
+        UserModel GetUser(int id);
+        void Create(UserModel user);
         void Delete(int id);
-        void Update(int id, User user);
+        void Update(int id, UserModel user);
     }
 }

@@ -5,7 +5,8 @@ using Shop.Models;
 
 namespace Shop.BusinessLogic.Services.Implementations
 {
-    internal class AuthService
+    public class AuthService
     {
+        // TODO JWT Authorization
     }
 }

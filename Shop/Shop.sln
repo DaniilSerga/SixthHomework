@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32630.192
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shop", "Shop\Shop.csproj", "{3B2BDE43-65C2-43A7-B120-850A2FB3CB02}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shop", "Shop\Shop.csproj", "{3B2BDE43-65C2-43A7-B120-850A2FB3CB02}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1. Api", "1. Api", "{D543A645-87FE-4BF5-A18E-2B21E85AC703}"
 EndProject
@@ -15,13 +15,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4. Parser", "4. Parser", "{
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5. Common", "5. Common", "{528674CC-CA16-42C1-AAB1-C61CC766C11D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shop.BusinessLogic", "Shop.BusinessLogic\Shop.BusinessLogic.csproj", "{8DF8A0D9-6D8A-425B-BEDD-86760CD03DC3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shop.BusinessLogic", "Shop.BusinessLogic\Shop.BusinessLogic.csproj", "{8DF8A0D9-6D8A-425B-BEDD-86760CD03DC3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shop.Models", "Shop.Models\Shop.Models.csproj", "{AF317D69-32A1-49E7-96A1-594F27B05A10}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shop.Models", "Shop.Models\Shop.Models.csproj", "{AF317D69-32A1-49E7-96A1-594F27B05A10}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shop.Parser", "Shop.Parser\Shop.Parser.csproj", "{9A46C961-0DC9-4B99-A7DA-0C79CE8F264A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shop.Parser", "Shop.Parser\Shop.Parser.csproj", "{9A46C961-0DC9-4B99-A7DA-0C79CE8F264A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shop.Common", "Shop.Common\Shop.Common.csproj", "{8F151695-A547-4D16-BFE1-FD1E2E7474A5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Shop.Common", "Shop.Common\Shop.Common.csproj", "{8F151695-A547-4D16-BFE1-FD1E2E7474A5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

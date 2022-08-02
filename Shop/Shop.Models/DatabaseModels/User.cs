@@ -9,13 +9,13 @@ namespace Shop.Models.DatabaseModels
         [Key]
         public int Id { get; set; }
 
-        public string Name { get; set; }
+        public string Name { get; set; } = "";
 
         public int Age { get; set; }
 
-        public string PasswordHash { get; set; }
+        public byte[] PasswordHash { get; set; } = null!;
 
-        public string PasswordSalt { get; set; }
+        public byte[] PasswordSalt { get; set; } = null!;
 
         public List<Sale> Sells { get; set; } = new();
     }

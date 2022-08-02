@@ -5,7 +5,7 @@ using Shop.Models;
 
 namespace Shop.BusinessLogic.Services.Implementations
 {
-    internal class SaleService : ISaleService
+    public class SaleService : ISaleService
     {
         private readonly ApplicationContext _context;
 

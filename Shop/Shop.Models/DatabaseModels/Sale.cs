@@ -10,10 +10,10 @@ namespace Shop.Models.DatabaseModels
         public int Id { get; set; }
 
         public int UserId { get; set; }
-        public User User { get; set; }
+        public User User { get; set; } = new();
 
         public int ProductId { get; set; }
-        public Product Product { get; set; }
+        public Product Product { get; set; } = new();
 
         public DateTime PurchaseDate { get; set; } = DateTime.Now;
     }

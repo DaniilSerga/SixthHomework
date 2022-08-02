@@ -1,66 +1,76 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using Shop.BusinessLogic.Services.Contracts;
 using Shop.Models.DatabaseModels;
 using Shop.Models;
+using Shop.Common.Models;
 
 namespace Shop.BusinessLogic.Services.Implementations
 {
-    internal class UserService : IUserService
+    public class UserService : IUserService
     {
-        public readonly ApplicationContext _context;
+        private readonly ApplicationContext _context;
+        private readonly IMapper _mapper;
 
-        public UserService(ApplicationContext context)
+        public UserService(ApplicationContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
-        public List<User> GetAllUsers() => _context.Users.AsNoTracking().ToList();
-
-        public User GetUser(int id)
+        public List<UserModel> GetAllUsers()
         {
-            if (!UserExists(id))
-            {
-                throw new ArgumentException("No matches found.", nameof(id));
-            }
+            var users = _context.Users.AsNoTracking().ToList();
 
-            return _context.Users.FirstOrDefault(u => u.Id == id);
+            return _mapper.Map<List<User>, List<UserModel>>(users);
         }
 
-        public void Create(User user)
+        public UserModel GetUser(int id)
         {
+            var user = _context.Users.FirstOrDefault(u => u.Id == id);
+
             if (user is null)
             {
-                throw new ArgumentNullException(nameof(user), "User was null.");
+                throw new ArgumentException($"No user with id: {id} was found.", nameof(id));
             }
 
+            return _mapper.Map<User, UserModel>(user);
+        }
+
+        public void Create(UserModel userModel)
+        {
+            if (userModel is null)
+            {
+                throw new ArgumentNullException(nameof(userModel), "User was null.");
+            }
+
+            var user = _mapper.Map<UserModel, User>(userModel);
             _context.Users.Add(user);
             _context.SaveChanges();
         }
 
         public void Delete(int id)
         {
-            _context.Users.Remove(GetUser(id));
+            _context.Users.Remove(_mapper.Map<UserModel, User>(GetUser(id)));
             _context.SaveChanges();
         }
 
-        public void Update(int id, User user)
+        public void Update(int id, UserModel userModel)
         {
-            if (user is null)
+            if (userModel is null)
             {
-                throw new ArgumentNullException(nameof(user), "User was null.");
-            }
-
-            if (!UserExists(id))
-            {
-                throw new ArgumentNullException(nameof(id), $"User with id: {id} doesn't exist.");
+                throw new ArgumentNullException(nameof(userModel), "User was null.");
             }
 
             var dbUser = _context.Users.FirstOrDefault(u => u.Id == id);
-            dbUser = user;
+
+            if (dbUser is null)
+            {
+                throw new ArgumentException($"User with id: {id} doesn't exists.");
+            }
+            dbUser = _mapper.Map<UserModel, User>(userModel);
 
             _context.SaveChanges();
         }
-
-        public bool UserExists(int id) => _context.Users.FirstOrDefault(u => u.Id == id) != null;
     }
 }
