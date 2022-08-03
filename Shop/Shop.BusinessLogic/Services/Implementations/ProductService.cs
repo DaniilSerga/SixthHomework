@@ -12,15 +12,10 @@ namespace Shop.BusinessLogic.Services.Implementations
         private readonly ApplicationContext _context;
         private readonly IMapper _mapper;
 
-        public ProductService(ApplicationContext context, IMapper mapper)
+        public ProductService(IMapper mapper, ApplicationContext context)
         {
             _context = context;
             _mapper = mapper;
-        }
-
-        public List<ProductModel> GetAllProducts()
-        {
-            return _mapper.Map<List<Product>, List<ProductModel>>(_context.Products.AsNoTracking().ToList());
         }
 
         public ProductModel GetProduct(int id)

@@ -5,7 +5,6 @@ namespace Shop.BusinessLogic.Services.Contracts
 {
     public interface IProductService
     {
-        List<ProductModel> GetAllProducts();
         ProductModel GetProduct(int id);
         void Create(ProductModel product);
         void Delete(int id);

@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Shop.Controllers
 {
+    [Route("api/[controller]")]
+    [ApiController]
     public class SaleController : Controller
     {
         private readonly ISaleService _saleService;
@@ -11,12 +13,6 @@ namespace Shop.Controllers
         public SaleController(ISaleService saleService)
         {
             _saleService = saleService;
-        }
-
-        [HttpGet]
-        public ActionResult<IEnumerable<SaleModel>> GetAllSales()
-        {
-            return Ok(_saleService.GetAllSales());
         }
 
         [HttpGet]

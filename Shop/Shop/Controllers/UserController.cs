@@ -4,6 +4,8 @@ using Shop.Common.Models;
 
 namespace Shop.Controllers
 {
+    [Route("api/[controller]")]
+    [ApiController]
     public class UserController : Controller
     {
         private readonly IUserService _userService;
@@ -11,13 +13,6 @@ namespace Shop.Controllers
         public UserController(IUserService userService)
         {
             _userService = userService;
-        }
-
-        [HttpGet]
-        public ActionResult<IEnumerable<UserModel>> GetUsers()
-        {
-            _userService.GetAllUsers();
-            return Ok();
         }
 
         [HttpGet]

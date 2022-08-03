@@ -25,8 +25,11 @@ builder.Services.AddTransient<ISaleService, SaleService>();
 #endregion
 
 #region AutoMapper
-var mappingConfig = new MapperConfiguration(cfg => cfg.AddProfile(new MappingProfile()));
-builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+var mappingConfig = new MapperConfiguration(mc =>
+{
+    mc.AddProfile(new MappingProfile());
+});
+
 IMapper mapper = mappingConfig.CreateMapper();
 builder.Services.AddSingleton(mapper);
 #endregion

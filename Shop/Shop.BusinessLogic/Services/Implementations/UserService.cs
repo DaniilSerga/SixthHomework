@@ -18,13 +18,6 @@ namespace Shop.BusinessLogic.Services.Implementations
             _mapper = mapper;
         }
 
-        public List<UserModel> GetAllUsers()
-        {
-            var users = _context.Users.AsNoTracking().ToList();
-
-            return _mapper.Map<List<User>, List<UserModel>>(users);
-        }
-
         public UserModel GetUser(int id)
         {
             var user = _context.Users.FirstOrDefault(u => u.Id == id);

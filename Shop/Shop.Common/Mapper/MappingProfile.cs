@@ -8,13 +8,9 @@ namespace Shop.Common.Mapper
     {
         public MappingProfile()
         {
-            CreateMap<Product, ProductModel>().ReverseMap();
-            CreateMap<List<Product>, List<ProductModel>>().ReverseMap();
-
-            CreateMap<User, UserModel>().ReverseMap();
-            CreateMap<List<User>, List<UserModel>>().ReverseMap();
-
-            CreateMap<Sale, SaleModel>().ReverseMap();
+            CreateMap<ProductModel, Product>();
+            CreateMap<UserModel, User>();
+            CreateMap<SaleModel, Sale>();
         }
     }
 }

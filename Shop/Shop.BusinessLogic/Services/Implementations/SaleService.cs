@@ -18,12 +18,6 @@ namespace Shop.BusinessLogic.Services.Implementations
             _mapper = mapper;
         }
 
-        public List<SaleModel> GetAllSales()
-        {
-            return _mapper.Map<List<Sale>, List<SaleModel>>(_context.Sales.AsNoTracking().ToList());
-        }
-
-
         public SaleModel GetSale(int id)
         {
             if (!SaleExists(id))

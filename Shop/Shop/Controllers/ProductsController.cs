@@ -16,12 +16,6 @@ namespace Shop.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<ProductModel>> GetProducts()
-        {
-            return Ok(_productService.GetAllProducts());
-        }
-
-        [HttpGet]
         public ActionResult GetProduct(int id)
         {
             _productService.GetProduct(id);
