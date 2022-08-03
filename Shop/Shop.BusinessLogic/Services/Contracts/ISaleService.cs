@@ -1,13 +1,13 @@
-﻿using Shop.Models.DatabaseModels;
+﻿using Shop.Common.Models;
 
 namespace Shop.BusinessLogic.Services.Contracts
 {
     public interface ISaleService
     {
-        List<Sale> GetAllSales();
-        Sale GetSale(int id);
-        void Create(int userId, int productId);
+        List<SaleModel> GetAllSales();
+        SaleModel GetSale(int id);
+        void Create(SaleModel sale);
         void Delete(int id);
-        void Update(int id, Sale sale);
+        void Update(int id, SaleModel sale);
     }
 }

@@ -1,13 +1,14 @@
 ﻿using Shop.Models.DatabaseModels;
+using Shop.Common.Models;
 
 namespace Shop.BusinessLogic.Services.Contracts
 {
     public interface IProductService
     {
-        List<Product> GetAllProducts();
-        Product GetProduct(int id);
-        void Create(Product product);
+        List<ProductModel> GetAllProducts();
+        ProductModel GetProduct(int id);
+        void Create(ProductModel product);
         void Delete(int id);
-        void Update(int id, Product product);
+        void Update(int id, ProductModel product);
     }
 }

@@ -1,54 +1,71 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using Shop.BusinessLogic.Services.Contracts;
 using Shop.Models.DatabaseModels;
 using Shop.Models;
+using Shop.Common.Models;
 
 namespace Shop.BusinessLogic.Services.Implementations
 {
     public class SaleService : ISaleService
     {
         private readonly ApplicationContext _context;
+        private readonly IMapper _mapper;
 
-        public SaleService(ApplicationContext context)
+        public SaleService(ApplicationContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
-        public List<Sale> GetAllSales() => _context.Sales.AsNoTracking().ToList();
+        public List<SaleModel> GetAllSales()
+        {
+            return _mapper.Map<List<Sale>, List<SaleModel>>(_context.Sales.AsNoTracking().ToList());
+        }
 
-        public Sale GetSale(int id)
+
+        public SaleModel GetSale(int id)
         {
             if (!SaleExists(id))
             {
                 throw new ArgumentException($"Sale with id:{id} doesn't exists.");
             }
 
-            return _context.Sales.FirstOrDefault(s => s.Id == id);
+            var sale = _context.Sales.FirstOrDefault(s => s.Id == id);
+
+            if (sale is null)
+            {
+                throw new ArgumentException("Sale was not found");
+            }
+
+            return _mapper.Map<Sale, SaleModel>(sale);
         }
 
-        public void Create(int userId, int productId)
+        public void Create(SaleModel sale)
         {
-            if (!UserExists(userId))
+            if (!UserExists(sale.UserId))
             {
                 throw new ArgumentException("User doesn't exists.");
             }
 
-            if (!ProductExists(productId))
+            if (!ProductExists(sale.ProductId))
             {
                 throw new ArgumentException("Product doesn't exists.");
             }
 
-            _context.Sales.Add(new Sale { ProductId = productId, UserId = userId });
+            var dbSale = _mapper.Map<SaleModel, Sale>(sale);
+            
+            _context.Sales.Add(dbSale);
             _context.SaveChanges();
         }
 
         public void Delete(int id)
         {
-            _context.Sales.Remove(GetSale(id));
+            _context.Sales.Remove(_mapper.Map<SaleModel, Sale>(GetSale(id)));
             _context.SaveChanges();
         }
 
-        public void Update(int id, Sale sale)
+        public void Update(int id, SaleModel sale)
         {
             if (!SaleExists(id))
             {
@@ -61,7 +78,7 @@ namespace Shop.BusinessLogic.Services.Implementations
             }
 
             var dbSale = _context.Sales.FirstOrDefault(s => s.Id == id);
-            dbSale = sale;
+            dbSale = _mapper.Map<SaleModel, Sale>(sale);
             
             _context.SaveChanges();
         }

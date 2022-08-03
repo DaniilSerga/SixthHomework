@@ -1,49 +1,65 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 using Shop.BusinessLogic.Services.Contracts;
 using Shop.Models.DatabaseModels;
+using Shop.Common.Models;
 using Shop.Models;
 
 namespace Shop.BusinessLogic.Services.Implementations
 {
     public class ProductService : IProductService
     {
-        private ApplicationContext _context;
+        private readonly ApplicationContext _context;
+        private readonly IMapper _mapper;
 
-        public ProductService(ApplicationContext context)
+        public ProductService(ApplicationContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
-        public List<Product> GetAllProducts() => _context.Products.AsNoTracking().ToList();
+        public List<ProductModel> GetAllProducts()
+        {
+            return _mapper.Map<List<Product>, List<ProductModel>>(_context.Products.AsNoTracking().ToList());
+        }
 
-        public Product GetProduct(int id)
+        public ProductModel GetProduct(int id)
         {
             if (!ProductExists(id))
             {
                 throw new ArgumentException($"Product with id: {id} doesn't exist.");
             }
 
-            return _context.Products.FirstOrDefault(p => p.Id == id);
+            var product = _context.Products.FirstOrDefault(p => p.Id == id);
+
+            if (product is null)
+            {
+                throw new ArgumentException("Product was not found.");
+            }
+
+            return _mapper.Map<Product, ProductModel>(product);
         }
 
-        public void Create(Product product)
+        public void Create(ProductModel product)
         {
             if (product is null)
             {
                 throw new ArgumentNullException(nameof(product), "Parameter was null.");
             }
 
-            _context.Products.Add(product);
+            var dbProduct = _mapper.Map<ProductModel, Product>(product);
+
+            _context.Products.Add(dbProduct);
             _context.SaveChanges();
         }
 
         public void Delete(int id)
         {
-            _context.Products.Remove(GetProduct(id));
+            _context.Products.Remove(_mapper.Map<ProductModel, Product>(GetProduct(id)));
             _context.SaveChanges();
         }
 
-        public void Update(int id, Product product)
+        public void Update(int id, ProductModel product)
         {
             if (product is null)
             {
@@ -56,7 +72,7 @@ namespace Shop.BusinessLogic.Services.Implementations
             }
 
             var dbProduct = _context.Products.FirstOrDefault(p => p.Id == id);
-            dbProduct = product;
+            dbProduct = _mapper.Map<ProductModel, Product>(product);
 
             _context.SaveChanges();
         }

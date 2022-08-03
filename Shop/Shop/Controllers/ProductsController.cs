@@ -16,7 +16,10 @@ namespace Shop.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<ProductModel>> GetProducts() => Ok(_productService.GetAllProducts());
+        public ActionResult<IEnumerable<ProductModel>> GetProducts()
+        {
+            return Ok(_productService.GetAllProducts());
+        }
 
         [HttpGet]
         public ActionResult GetProduct(int id)
@@ -25,8 +28,12 @@ namespace Shop.Controllers
             return Ok();
         }
 
-        //[HttpPost]
-        //public ActionResult CreateProduct(Product product) => Ok(ProductService.Create(product)); 
+        [HttpPost]
+        public ActionResult CreateProduct(ProductModel product)
+        {
+            _productService.Create(product);
+            return Ok();
+        }
 
         [HttpPut]
         public ActionResult UpdateProduct(int id, ProductModel product)

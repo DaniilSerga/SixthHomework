@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Shop.Models;
 using Shop.BusinessLogic.Services.Contracts;
 using Shop.Common.Models;
 
@@ -15,12 +14,31 @@ namespace Shop.Controllers
         }
 
         [HttpGet]
-        public ActionResult<IEnumerable<UserModel>> GetUsers() => Ok(_userService.GetAllUsers());
+        public ActionResult<IEnumerable<UserModel>> GetUsers()
+        {
+            _userService.GetAllUsers();
+            return Ok();
+        }
 
         [HttpGet]
-        public ActionResult GetUser(int id) => Ok(_userService.GetUser(id));
+        public ActionResult GetUser(int id)
+        {
+            _userService.GetUser(id);
+            return Ok();
+        }
+
+        [HttpDelete]
+        public ActionResult DeleteUser(int id)
+        {
+            _userService.Delete(id);
+            return Ok();
+        }
 
         [HttpPost]
-        public ActionResult Create(UserModel user) => Ok(_userService.Create(user));
+        public ActionResult CreateUser(UserModel user)
+        {
+            _userService.Create(user);
+            return Ok();
+        }
     }
 }
